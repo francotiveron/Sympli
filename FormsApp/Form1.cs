@@ -78,9 +78,12 @@ namespace FormsApp
             bool result = 
                 Uri.TryCreate(UrlText.Text, UriKind.Absolute, out var uriResult)
                 && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
-            if (!result) e.Cancel = true;
-            UrlText.Select(0, UrlText.Text.Length);
-            ErrorProvider.SetError(UrlText, "Invalid Url");
+            if (!result)
+            {
+                e.Cancel = true;
+                UrlText.Select(0, UrlText.Text.Length);
+                ErrorProvider.SetError(UrlText, "Invalid Url");
+            }
         }
 
         private void UrlText_Validated(object sender, EventArgs e)
