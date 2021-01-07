@@ -5,11 +5,13 @@ namespace Caching
 {
     record CacheId(string Keywords, string Url);
     record CacheEntry(DateTime created, string Result);
+
     public interface ICache
     {
         bool TryGet(string keywords, string url, out string result);
         void Put(string keywords, string url, string result);
     }
+
     public interface ICacheFactory
     {
         ICache Create(TimeSpan? validityTimeSpan = null);

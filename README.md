@@ -1,4 +1,10 @@
 # Sympli
+
+used platform:
+.NET 5.0, C# 9.0
+Microsoft Visual Studio Enterprise 2019
+Version 16.8.3
+
 Sympli Web Search
 
 Web Search is implemented in the Crawling library

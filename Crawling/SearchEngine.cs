@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -32,7 +31,6 @@ namespace Crawling
             _cache = cache;
             _client = http;
         }
-
 
         public async Task<string> SearchAsync(string keywords, string url)
         {
@@ -72,11 +70,10 @@ namespace Crawling
     {
         public GoogleSearchEngine(ICache cache, IClient client) : base(@"https://www.google.com", cache, client) {}
 
-        protected override string Query(string keywords, string url) => $@"{ HostUrl}/search?q={keywords}&num=100";
+        protected override string Query(string keywords, string url) => $@"{HostUrl}/search?q={keywords}&num=100";
 
         protected override string Marker => @"div class=""ZINbbc xpd O9g5cc uUPGi""";
     }
-
 
     [SearchEngineFuture]
     class BingSearchEngine : SearchEngine
@@ -98,10 +95,10 @@ namespace Crawling
         ISearchEngine Get();
     }
 
-
     public class SearchEngineFactory
     {
         ICacheFactory CacheFactory { get; }
+
         IClient Client { get; }
 
         record SearchEngineDescriptor(string Name, bool Available, Type Type, SearchEngineFactory Factory) : ISearchEngineDescriptor
@@ -112,6 +109,7 @@ namespace Crawling
         }
 
         public ISearchEngineDescriptor[] Engines { get; }
+
         public SearchEngineFactory(ICacheFactory cacheFactory, IClient client)
         {
             CacheFactory = cacheFactory;
